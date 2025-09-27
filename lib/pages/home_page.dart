@@ -42,19 +42,21 @@ class _HomePageState extends State<HomePage> {
                 "¿Quién es ese pokemón? Busca el pokemon de tu preferencia y observa sus cualidades",
               ),
               SizedBox(height: 16),
-              Expanded(
-                child: GridView(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    childAspectRatio: 0.97,
-                  ),
-                  children: _pokemonResponse!.pokemon
-                      .map((pokemon) => PokemonWidget(pokemon: pokemon))
-                      .toList(),
-                ),
-              ),
+              _pokemonResponse == null
+                  ? Center(child: CircularProgressIndicator())
+                  : Expanded(
+                      child: GridView(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                          childAspectRatio: 0.97,
+                        ),
+                        children: _pokemonResponse!.pokemon
+                            .map((pokemon) => PokemonWidget(pokemon: pokemon))
+                            .toList(),
+                      ),
+                    ),
             ],
           ),
         ),
