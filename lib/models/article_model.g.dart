@@ -10,7 +10,7 @@ ArticleModel _$ArticleModelFromJson(Map<String, dynamic> json) => ArticleModel(
   userId: json['userId'] as String,
   title: json['title'] as String,
   likes: json['likes'] as String,
-  id: json['id'] as String,
+  id: json['id'] as String?,
 );
 
 Map<String, dynamic> _$ArticleModelToJson(ArticleModel instance) =>

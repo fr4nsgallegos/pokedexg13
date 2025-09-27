@@ -10,4 +10,14 @@ abstract class ApiServiceRetrofit {
 
   @GET("/articles")
   Future<List<ArticleModel>> getArticles();
+
+  @POST("/articles")
+  Future<ArticleModel> createArticle(@Body() ArticleModel articulo);
+
+  @GET("/articlesUsandoTOken")
+  Future<ArticleModel> getArticlesConToken(
+    @Header("Authorization")
+    String
+    token, //CASO PARA PASAR  TOKEN -> final articles = await client.getArticlesConToken("le pasas el token aqui");
+  );
 }

@@ -7,13 +7,13 @@ class ArticleModel {
   String userId;
   String title;
   String likes;
-  String id;
+  String? id;
 
   ArticleModel({
     required this.userId,
     required this.title,
     required this.likes,
-    required this.id,
+    this.id,
   });
 
   factory ArticleModel.fromJson(Map<String, dynamic> json) => ArticleModel(

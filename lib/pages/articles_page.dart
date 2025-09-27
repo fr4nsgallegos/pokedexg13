@@ -17,7 +17,7 @@ class _ArticlesPageState extends State<ArticlesPage> {
   @override
   void initState() {
     final dio = Dio();
-    final client = ApiServiceRetrofit(dio);
+    client = ApiServiceRetrofit(dio);
     futuresArticles = client.getArticles();
 
     // TODO: implement initState
@@ -29,7 +29,23 @@ class _ArticlesPageState extends State<ArticlesPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Artículos"),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.add))],
+        actions: [
+          IconButton(
+            onPressed: () async {
+              final ArticleModel articleModelAux = ArticleModel(
+                title: "Titulo nuevo",
+                likes: "0",
+                userId: "jgallegos",
+                // id: id,
+              );
+              final created = await client.createArticle(articleModelAux);
+              futuresArticles = client.getArticles();
+              setState(() {});
+              print(created.id);
+            },
+            icon: Icon(Icons.add),
+          ),
+        ],
       ),
       body: FutureBuilder(
         future: futuresArticles,
@@ -50,7 +66,7 @@ class _ArticlesPageState extends State<ArticlesPage> {
                 child: ListTile(
                   title: Text(articles[index].title),
                   subtitle: Text(articles[index].userId),
-                  leading: Text(articles[index].id),
+                  leading: Text(articles[index].id ?? "0"),
                   trailing: Text(articles[index].likes),
                 ),
               );
