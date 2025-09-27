@@ -1,8 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:pokemonappg13/models/pokemon_reponse.dart';
+import 'package:pokemonappg13/services/pokemon_api.dart';
 import 'package:pokemonappg13/widgets/pokemon_widget.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  PokemonResponse? _pokemonResponse;
+
+  Future<void> fetchPokemonResponse() async {
+    _pokemonResponse = await PokemonApi().getPokemonResponse();
+    print(_pokemonResponse);
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    fetchPokemonResponse();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,17 +50,9 @@ class HomePage extends StatelessWidget {
                     mainAxisSpacing: 10,
                     childAspectRatio: 0.97,
                   ),
-                  children: [
-                    PokemonWidget(),
-                    PokemonWidget(),
-                    PokemonWidget(),
-                    PokemonWidget(),
-                    PokemonWidget(),
-                    PokemonWidget(),
-                    PokemonWidget(),
-                    PokemonWidget(),
-                    PokemonWidget(),
-                  ],
+                  children: _pokemonResponse!.pokemon
+                      .map((pokemon) => PokemonWidget(pokemon: pokemon))
+                      .toList(),
                 ),
               ),
             ],
