@@ -20,4 +20,7 @@ abstract class ApiServiceRetrofit {
     String
     token, //CASO PARA PASAR  TOKEN -> final articles = await client.getArticlesConToken("le pasas el token aqui");
   );
+
+  @GET("/articles/{id}")
+  Future<ArticleModel> getSingleArticle(@Path("id") int id);
 }

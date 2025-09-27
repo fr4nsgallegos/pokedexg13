@@ -27,6 +27,12 @@ class _ArticlesPageState extends State<ArticlesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          ArticleModel articuloEspecifico = await client.getSingleArticle(6);
+          print(articuloEspecifico.title);
+        },
+      ),
       appBar: AppBar(
         title: Text("Artículos"),
         actions: [
